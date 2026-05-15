@@ -1,11 +1,24 @@
+<<<<<<< HEAD
 generator client {
   provider = "prisma-client-js"
+=======
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+>>>>>>> a7e600692fd3d1aef0eab081e7861f1d2fc1b6df
 }
 
 datasource db {
   provider = "postgresql"
 }
 
+<<<<<<< HEAD
 
 
 model Publisher {
@@ -36,3 +49,18 @@ model Genre {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }
+=======
+model Author {
+  id    String @id @default(uuid())
+  email String @unique
+  name  String
+  books Book[]
+}
+
+model Book {
+  id       String @id @default(uuid())
+  title    String
+  authorId String
+  author   Author @relation(fields: [authorId], references: [id])
+}
+>>>>>>> a7e600692fd3d1aef0eab081e7861f1d2fc1b6df
