@@ -26,8 +26,9 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.1.0",
+    "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.1.0",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "pg": "^8.20.0"
   }
 }
