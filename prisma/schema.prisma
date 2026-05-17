@@ -1,66 +1,49 @@
-<<<<<<< HEAD
-generator client {
-  provider = "prisma-client-js"
-=======
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
->>>>>>> a7e600692fd3d1aef0eab081e7861f1d2fc1b6df
 }
 
 datasource db {
   provider = "postgresql"
 }
 
-<<<<<<< HEAD
-
+model Author {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  books     Book[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
 model Publisher {
-  publisher_id   Int      @id @default(autoincrement())
-  publisher_name String   @db.VarChar(50)
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt
-
-  books          Book[]
+  id        String   @id @default(uuid())
+  name      String
+  books     Book[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Book {
-  book_id      Int       @id @default(autoincrement())
-  publisher_id Int
-  publisher    Publisher @relation(fields: [publisher_id], references: [publisher_id])
-  book_name    String    @db.VarChar(25)
+  id          String    @id @default(uuid())
+  title       String
 
-  genres       Genre[]
+  authorId    String
+  author      Author    @relation(fields: [authorId], references: [id])
 
-  created_at   DateTime  @default(now())
-  updated_at   DateTime  @updatedAt
+  publisherId String
+  publisher   Publisher @relation(fields: [publisherId], references: [id])
+
+  genres      Genre[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Genre {
-  genre_id   Int      @id @default(autoincrement())
-  name       String   @unique
-  books      Book[]
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id        String   @id @default(uuid())
+  name      String   @unique
+  books     Book[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
-=======
-model Author {
-  id    String @id @default(uuid())
-  email String @unique
-  name  String
-  books Book[]
-}
-
-model Book {
-  id       String @id @default(uuid())
-  title    String
-  authorId String
-  author   Author @relation(fields: [authorId], references: [id])
-}
->>>>>>> a7e600692fd3d1aef0eab081e7861f1d2fc1b6df
